@@ -10,7 +10,7 @@ If you’re running a compatible browser, this demo also showcases the [Payment 
 
 ## Overview
 
-<img src="public/images/screenshots/demo-chrome.png" alt="Demo on Google Chrome" width="610"><img src="public/images/screenshots/demo-iphone.png" alt="Demo on Safari iPhone X" width="278">
+<img src="public/images/screenshots/demo-chrome.png" alt="Demo on Google Chrome" width="610"><img src="public/images/screenshots/demo-iphone.png" alt="Demo on Safari iPhone X" width="272">
 
 This demo provides an all-in-one example for integrating with Stripe on the web:
 
@@ -26,7 +26,7 @@ This demo provides an all-in-one example for integrating with Stripe on the web:
 🚀 | **Built-in proxy for local HTTPS and webhooks.** Card payments require HTTPS and asynchronous payment methods with redirects rely on webhooks to complete transactions—[ngrok](https://ngrok.com/) is integrated so the app is served locally over HTTPS and an endpoint is publicly exposed for webhooks.
 🔧 | **Webhook signing and idempotency keys**. We verify webhook signatures and pass idempotency keys to charge creations, two recommended practices for asynchronous payment flows.
 📱 | **Responsive design**. The checkout experience works on all screen sizes. Apple Pay works on Safari for iPhone and iPad if the Wallet is enabled, and Payment Request works on Chrome for Android.
-📦 | **No datastore required.** Products, SKUs, and Orders are stored using the [Stripe Orders API](https://stripe.com/docs/orders), which you can replace with your own database to keep track of orders and inventory.
+📦 | **No datastore required.** Products, and SKUs are stored using the [Stripe API](https://stripe.com/docs/api/products), which you can replace with your own database to keep track of products and inventory.
 
 ## Payments Integration
 
@@ -35,7 +35,7 @@ The frontend code for the demo is in the `public/` directory.
 The core logic of the Stripe integration is mostly contained within two files:
 
 1.  [`public/javascripts/payments.js`](public/javascripts/payments.js) creates the payment experience on the frontend using Stripe Elements.
-2.  [`server/node/routes.js`](server/routes.js) defines the routes on the backend that create Stripe charges and receive webhook events.
+2.  [`server/node/routes.js`](server/node/routes.js) defines the routes on the backend that create Stripe charges and receive webhook events.
 
 ### Card Payments with Stripe Elements
 
@@ -61,15 +61,21 @@ The [Sources API](https://stripe.com/docs/sources) provides a single integration
 
 ## Getting Started with Node
 
-There are a couple server implementations in the [`server`](/server) directory. Instructions for running the Node.js server in [`server/node`](/server/node) are below, but if you’re more comfortable with Python you can find a README explaining how to run a Flask server in the [`server/python`](/server/python) directory. Both servers have the same endpoints to handle requests from the frontend and interact with the [Stripe libraries](https://stripe.com/docs/libraries).
+Instructions for running the Node.js server in [`server/node`](/server/node) are below. You can find alternative server implementations in the [`server`](/server) directory:
+
+- Node, Express: [`server/node`](/server/node)
+- Python, Flask: [`server/python`](/server/python)
+- Ruby, Sinatra: [`server/ruby`](/server/ruby)
+
+All servers have the same endpoints to handle requests from the frontend and interact with the [Stripe libraries](https://stripe.com/docs/libraries).
 
 ### Requirements
 
 You’ll need the following:
 
-* [Node.js](http://nodejs.org) >= 8.x.
-* Modern browser that supports ES6 (Chrome to see the Payment Request, and Safari to see Apple Pay).
-* Stripe account to accept payments ([sign up](https://dashboard.stripe.com/register) for free).
+- [Node.js](http://nodejs.org) >= 8.x.
+- Modern browser that supports ES6 (Chrome to see the Payment Request, and Safari to see Apple Pay).
+- Stripe account to accept payments ([sign up](https://dashboard.stripe.com/register) for free).
 
 In your Stripe Dashboard, you can [enable the payment methods](https://dashboard.stripe.com/payments/settings) you’d like to test with one click.
 
@@ -87,7 +93,7 @@ Install dependencies using npm:
 
     npm install
 
-This demo uses the Stripe API as a datastore for products and orders, but you can always choose to use your own datastore instead. When starting the app for the first time, the initial loading can take a couple of seconds as it will automatically set up the products within Stripe.
+This demo uses the Stripe API as a datastore for products and SKUs, but you can always choose to use your own datastore instead. When starting the app for the first time, the initial loading can take a couple of seconds as it will automatically set up the products and SKUs within Stripe.
 
 Run the app:
 
@@ -111,5 +117,5 @@ Use this second URL in your browser to start the demo.
 
 ## Credits
 
-* Code: [Romain Huet](https://twitter.com/romainhuet) and [Thorsten Schaeff](https://twitter.com/thorwebdev)
-* Design: [Tatiana Van Campenhout](https://twitter.com/tatsvc)
+- Code: [Romain Huet](https://twitter.com/romainhuet) and [Thorsten Schaeff](https://twitter.com/thorwebdev)
+- Design: [Tatiana Van Campenhout](https://twitter.com/tatsvc)
